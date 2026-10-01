@@ -248,6 +248,10 @@ void measure_queries(std::uint64_t domain_count, std::uint64_t queries) {
     measurement.detail = std::to_string(conflicts) + " unknown verdicts";
     measurements().push_back(std::move(measurement));
   }
+  // The registry must be closed before the scratch directory is removed: on
+  // Windows an open lock file cannot be deleted, which would leave residue
+  // behind in the operator's temporary directory.
+  registry.value().reset();
   std::filesystem::remove_all(directory, ec);
 }
 
