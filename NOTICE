@@ -1,0 +1,41 @@
+Facility Failure Domain Registry
+Copyright 2026 Summon Software Labs.
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+Facility Failure Domain Registry is part of the Data Center Control Plane
+(DCCP). It is DCCP boundary 49 and owns the canonical authority for physical
+facility failure domains: stable failure-domain identities, typed domain
+classes, membership of opaque external resource identities, nesting and overlap
+relationships, shared-fate relationships, inter-domain dependency edges,
+declared independence, lifecycle, provenance, generation-bound immutable
+snapshots, conflict preservation and stale-generation rejection. It is built
+from the C++20 standard library only.
+
+Third-party notices
+-------------------
+
+This product includes no third-party source code and links no third-party
+libraries. It is implemented against the C++20 standard library and the
+operating-system interfaces it needs for durable atomic file replacement,
+exclusive file locking and non-interactive process termination in tests.
+
+The canonical serialization format, the integrity digest (SHA-256, FIPS 180-4)
+and every identity, generation, epoch and incarnation type are implemented in
+this repository. No third-party cryptographic library is used.
+
+Facility Failure Domain Registry does not collect or transmit any telemetry. All
+state, evidence and logs are written to local files chosen by the operator and
+never leave the machine running the software.
+
+Facility Failure Domain Registry accepts contributions from individuals and
+organizations on the terms of the Apache License 2.0 without requiring a
+Contributor License Agreement (CLA). See CONTRIBUTING.md for contribution
+guidance.
+
+Trademarks
+----------
+
+All product names, trademarks, and registered trademarks mentioned in this
+repository are the property of their respective owners and are used only for
+identification purposes.

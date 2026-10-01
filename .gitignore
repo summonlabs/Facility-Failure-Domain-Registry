@@ -1,0 +1,29 @@
+# Build trees
+/build/
+/build-*/
+/out/
+/out-*/
+/_build/
+cmake-build-*/
+CMakeUserPresets.json
+
+# IDE / editor
+.vs/
+.vscode/
+.idea/
+*.suo
+*.user
+*.sln.DotSettings.user
+
+# Local registry stores and scratch output
+*.ffdr
+*.ffdr.lock
+*.ffdr.epoch
+scratch/
+
+# OS residue
+Thumbs.db
+desktop.ini
+*.log
+*.dmp
+*.pdb
