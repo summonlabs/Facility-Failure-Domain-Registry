@@ -223,8 +223,9 @@ Three files, all derived from the configured store path:
 successful mutation is committed before the call returns: the whole generation is
 staged to a temporary file in the same directory, flushed, read back and verified
 byte for byte, then atomically replaced (`MoveFileEx` with
-`MOVEFILE_REPLACE_EXISTING | MOVEFILE_WRITE_THROUGH`), and finally the epoch
-record is advanced. With `Durability::ExplicitPublish` mutations advance the
+`MOVEFILE_REPLACE_EXISTING | MOVEFILE_WRITE_THROUGH`); the epoch record is
+published with the same staged, verified, atomic discipline, so a crash cannot
+leave a torn epoch behind either. With `Durability::ExplicitPublish` mutations advance the
 in-memory generation only and `publish()` commits; uncommitted state is discarded
 on close and is never half-written.
 
@@ -439,11 +440,11 @@ memory). Indicative measurements from the development machine, Release build:
 
 | Operation | Rate | Scale | Provenance |
 | --- | --- | --- | --- |
-| domain creation, in-memory generation | ~395 /s | 5 000 domains, one store | SYNTHETIC |
-| domain creation, durable publication | ~72 /s | 500 domains, one store | REAL |
-| store open + strict decode | ~471 /s | 500-domain generation, 78 KB | REAL |
-| upstream exposure query | ~1 506 /s | 2 000 domains, 1 992 edges | SYNTHETIC graph, real query |
-| pair failure-fate verdict | ~2 915 /s | 2 000 domains | SYNTHETIC graph, real query |
+| domain creation, in-memory generation | 384 /s | 5 000 domains, one store | SYNTHETIC |
+| domain creation, durable publication | 70 /s | 500 domains, one store | REAL |
+| store open + strict decode | 948 /s | 500-domain generation, 78 KB | REAL |
+| upstream exposure query | 3 259 /s | 2 000 domains, 1 992 edges | SYNTHETIC graph, real query |
+| pair failure-fate verdict | 3 001 /s | 2 000 domains | SYNTHETIC graph, real query |
 
 The difference between the first two rows is the honest cost of the durability
 claim: with `DurablePerMutation` every mutation writes, flushes, verifies and
