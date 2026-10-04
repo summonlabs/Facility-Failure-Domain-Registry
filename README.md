@@ -1,7 +1,6 @@
 # Facility Failure Domain Registry
 
-Canonical physical failure-domain authority for the Data Center Control Plane
-(DCCP). This repository is **DCCP boundary 49**.
+Canonical physical failure-domain authority.
 
 It answers one question, and answers it the same way every time:
 
